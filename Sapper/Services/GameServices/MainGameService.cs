@@ -9,7 +9,10 @@ namespace Sapper.Services.GameServices;
 public class MainGameService(IGameInfoService gameInfoService) : IMainGameService
 {
     private readonly IFieldCreator _fieldCreator = new FieldCreatorProxy();
-    
+
+    public Task<GameInfoResponse> GetGameInfo(Guid gameId) => 
+        gameInfoService.GetGameInfo(gameId);
+
     public async Task<GameInfoResponse> CreateNewGame(NewGameRequest newRequest)
     {
         var gameInfo = new GameInfoResponse(newRequest.Width, newRequest.Height, newRequest.Mines_count,

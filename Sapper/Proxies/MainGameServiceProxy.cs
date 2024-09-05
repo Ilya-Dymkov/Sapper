@@ -11,7 +11,21 @@ public class MainGameServiceProxy(IGameInfoService gameInfoService) : IMainGameS
 {
     private readonly IMainGameService _mainGameService = new MainGameService(gameInfoService);
     private readonly IProxyLogger _logger = new ProxyLogger();
-    
+
+    public Task<GameInfoResponse> GetGameInfo(Guid gameId)
+    {
+        try
+        {
+            _logger.Log(LogLevel.Information, $"Getting game info with id: {gameId}");
+            return _mainGameService.GetGameInfo(gameId);
+        }
+        catch (Exception e)
+        {
+            _logger.Log(LogLevel.Error, e.Message);
+            throw;
+        }
+    }
+
     public async Task<GameInfoResponse> CreateNewGame(NewGameRequest newRequest)
     {
         try

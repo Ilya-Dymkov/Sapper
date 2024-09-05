@@ -21,4 +21,8 @@
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Sapper\Sapper.csproj" />
+    </ItemGroup>
+
 </Project>
